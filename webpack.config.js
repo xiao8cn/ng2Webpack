@@ -10,8 +10,6 @@ const { GlobCopyWebpackPlugin, BaseHrefWebpackPlugin } = require('@angular/cli/p
 const { CommonsChunkPlugin } = require('webpack').optimize;
 const { AotPlugin } = require('@ngtools/webpack');
 
-const CompressionWebpackPlugin = require('compression-webpack-plugin');
-
 const nodeModules = path.join(process.cwd(), 'node_modules');
 const entryPoints = ["inline","polyfills","sw-register","styles","vendor","main"];
 const baseHref = "";
@@ -199,15 +197,6 @@ module.exports = {
         "dot": true,
         "ignore": "**/.gitkeep"
       }
-    }),
-    new CompressionWebpackPlugin({ //gzip 压缩
-      asset: '[path].gz[query]',
-      algorithm: 'gzip',
-      test: new RegExp(
-        '\\.(js|css)$'    //压缩 js 与 css
-      ),
-      threshold: 10240,
-      minRatio: 0.8
     }),
     new ProgressPlugin(),
     new HtmlWebpackPlugin({
