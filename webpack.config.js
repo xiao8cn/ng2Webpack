@@ -232,7 +232,7 @@ module.exports = {
     }
     }),
     new BaseHrefWebpackPlugin({}),
-    new CommonsChunkPlugin({
+    /*new CommonsChunkPlugin({
       "name": "inline",
       "minChunks": null
     }),
@@ -242,7 +242,7 @@ module.exports = {
       "chunks": [
         "main"
       ]
-    }),
+    }),*/
     new ExtractTextPlugin({
       "filename": "[name].bundle.css",
       "disable": true
@@ -287,6 +287,18 @@ module.exports = {
       "tsConfigPath": "src/tsconfig.app.json"
     })
   ],
+  "devServer": {
+    "proxy": { // proxy URLs to backend development server
+      '/api': 'http://localhost:3000'
+    },
+    "host": "localhost",
+    "port" : "4200",
+    "contentBase": path.join(__dirname, 'public'), // boolean | string | array, static file location
+    "compress": true, // enable gzip compression
+    "historyApiFallback": true, // true for index.html upon 404, object for multiple paths
+    "noInfo": true, // only errors & warns on hot reload
+    "lazy": false
+  },
   "node": {
     "fs": "empty",
     "global": true,
